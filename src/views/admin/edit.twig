@@ -17,7 +17,7 @@
               <li class=""><a href="#2" data-toggle="tab">Informatie</a></li>
               <li class=""><a href="#3" data-toggle="tab">Aanbod</a></li>
               <li class=""><a href="#4" data-toggle="tab">Beschrijving</a></li>
-              <li class=""><a href="#5" data-toggle="tab">Foto's</a></li>
+              <li class=""><a href="#5" data-toggle="tab">Afbeeldingen</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
               <div class="tab-pane fade active in" id="1">
@@ -160,13 +160,14 @@
                 </div>
                 <div class="tab-pane fade" id="5">
                 <fieldset>
-                    <legend>Foto's:</legend>
-                    <h5>Add images</h5>
-                    <p class="muted">Only *.jpg files</p>
+                    <legend>Afbeeldingen:</legend>
+                    <h5>Afbeeldingen Toevoegen</h5>
+                    <p class="muted">Enkel *.jpg files</p>
                     <input name="filesToUpload[]" id="filesToUpload" accept="image/jpeg" type="file" multiple="" />
-                    <h5>Select the Images you want to delete</h5>
+                    
                     
                     {% if images %}
+                        <h5>Selecteer de afbeeldingen die u wilt Verwijderen</h5>
                         <div id="imageContainer" class="clearfix">
                             {% for key, image in images %}
                                 <div class="img-polaroid image">

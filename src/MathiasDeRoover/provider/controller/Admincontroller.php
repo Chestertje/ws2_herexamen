@@ -298,12 +298,15 @@ class AdminController implements ControllerProviderInterface {
                     }
                     
                     //$images = glob('uploads/'.$vastgoed['Vastgoed_id'].'/*.*');
-                    $imagesArr = scandir("uploads/".$id. '/', 1);
                     $images = array();
-                    foreach($imagesArr as $image ){
-                        if('.jpg' == substr($image, -4)){
-                            array_push($images, $image);
-                            
+                    if(file_exists("uploads/".$id. '/')){
+                        $imagesArr = scandir("uploads/".$id. '/', 1);
+                        
+                        foreach($imagesArr as $image ){
+                            if('.jpg' == substr($image, -4)){
+                                array_push($images, $image);
+
+                            }
                         }
                     }
                     
