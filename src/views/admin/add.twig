@@ -1,0 +1,181 @@
+{% extends 'adminLayout.twig'%}
+{% set username = username %}
+{% set pageTitle = 'Immo - Vastgoed toevoegen' %}
+{% block pageContent%}
+
+    
+        <h2>Vastgoed toevoegen</h2>
+        <ul class="breadcrumb">
+            <li><a href="{{ app.url_generator.generate('adm.browse') }}">Overzicht</a> <span class="divider">/</span></li>
+            <li class="active">Vastgoed Toevoegen</li>
+        </ul>
+        {% form_theme addForm with 'form_errors.twig' %}
+        <form id="addForm" action="#" method="post" {{ form_enctype(addForm) }}>
+            <div class="bs-docs-example">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#1" data-toggle="tab">Locatie</a></li>
+              <li class=""><a href="#2" data-toggle="tab">Informatie</a></li>
+              <li class=""><a href="#3" data-toggle="tab">Aanbod</a></li>
+              <li class=""><a href="#4" data-toggle="tab">beschrijving</a></li>
+              <li class=""><a href="#5" data-toggle="tab">Foto's</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="1">
+                <fieldset>
+                    <legend>Locatie:</legend>
+                    <dl> 
+                        <dt>
+                            {{ form_label(addForm.plaats) }}
+                        </dt>
+                        <dd class="clearfix">
+                            {{ form_widget(addForm.plaats,{ 'attr': {'placeholder': 'Plaats'} }) }}
+                            {{ form_errors(addForm.plaats) }}
+                        </dd>
+                        <dt>
+                            {{ form_label(addForm.provincie) }}
+                        </dt>
+                        <dd class="clearfix">
+                            {{ form_widget(addForm.provincie) }}
+                            {{ form_errors(addForm.provincie) }}
+                        </dd>
+                        <dt>
+                            {{ form_label(addForm.straat) }}
+                        </dt>
+                        <dd class="clearfix">
+                            {{ form_widget(addForm.straat,{ 'attr': {'placeholder': 'Straat + nr'} }) }}
+                            {{ form_errors(addForm.straat) }}
+                        </dd>
+                    </dl>
+                    <ul class="pager">
+                        <li><a class="next" href="#">Next</a></li>
+                    </ul>
+                </fieldset>
+              </div>
+              <div class="tab-pane fade " id="2">
+                <fieldset>
+                    <legend>Informatie:</legend>
+                    <dl>
+                        <dt>
+                            {{ form_label(addForm.vastgoed_type) }}
+                        </dt>
+                        <dd class="clearfix">
+                            {{ form_widget(addForm.vastgoed_type) }}
+                            {{ form_errors(addForm.vastgoed_type) }}
+                        </dd>
+                        <div id="woningen">
+                            <dt>
+                                {{ form_label(addForm.bebouwing_type) }}
+                            </dt>
+
+                            <dd class="clearfix">
+                                {{ form_widget(addForm.bebouwing_type) }}
+                                {{ form_errors(addForm.bebouwing_type) }}
+                            </dd>
+                            <dt>
+                                {{ form_label(addForm.aantal_slaapkamers) }}
+                            </dt>
+                            <dd class="clearfix">
+                                {{ form_widget(addForm.aantal_slaapkamers) }}
+                                {{ form_errors(addForm.aantal_slaapkamers) }}
+                            </dd>
+                            <dt>
+                                {{ form_label(addForm.aantal_kamers) }}
+                            </dt>
+                            <dd class="clearfix">
+                                {{ form_widget(addForm.aantal_kamers) }}
+                                {{ form_errors(addForm.aantal_kamers) }}
+                            </dd>
+                            <dt>
+                                {{ form_label(addForm.bouwjaar) }}
+                            </dt>
+                            <dd class="clearfix">
+                                {{ form_widget(addForm.bouwjaar) }}
+                                {{ form_errors(addForm.bouwjaar) }}
+                            </dd>
+                            <dt>
+                                {{ form_label(addForm.garage) }}
+                            </dt>
+                            <dd class="clearfix">
+                                {{ form_widget(addForm.garage) }}
+                                {{ form_errors(addForm.garage) }}
+                            </dd>
+                        </div>
+                        <dt>
+                            {{ form_label(addForm.oppervlakte) }}
+                        </dt>
+                        <dd class="clearfix">
+                            {{ form_widget(addForm.oppervlakte) }}
+                            {{ form_errors(addForm.oppervlakte) }}
+                        </dd>
+                    </dl>
+                    <ul class="pager">
+                        <li><a class="prev" href="#">Previous</a></li>
+                        <li><a class="next" href="#">Next</a></li>
+                    </ul>
+                </fieldset>
+              </div>
+              <div class="tab-pane fade" id="3">
+                <fieldset>
+                    <legend>Aanbod:</legend>
+                    <dl>
+                        <dt>
+                            {{ form_label(addForm.status_vastgoed) }}
+                        </dt>
+                        <dd class="clearfix">
+                            {{ form_widget(addForm.status_vastgoed) }}
+                            {{ form_errors(addForm.status_vastgoed) }}
+                        </dd>
+                        <dt>
+                            {{ form_label(addForm.prijs) }}
+                        </dt>
+                        <dd class="clearfix">
+                            {{ form_widget(addForm.prijs,{ 'attr': {'placeholder': 'Prijs'} }) }}
+                            {{ form_errors(addForm.prijs) }}
+                        </dd>
+                    </dl>
+                </fieldset>
+                      <ul class="pager">
+                        <li><a class="prev" href="#">Previous</a></li>
+                        <li><a class="next" href="#">Next</a></li>
+                    </ul>
+              </div>
+              <div class="tab-pane fade" id="4">
+                <fieldset>
+                    <legend>Beschrijving:</legend>
+                    <dl>
+                        <dt>
+                            {{ form_label(addForm.beschrijving) }}
+                        </dt>
+                        <dd class="clearfix">
+                            {{ form_widget(addForm.beschrijving,{ 'attr': { 'class': 'tinymce' } }) }}
+                            {{ form_errors(addForm.beschrijving) }}
+                        </dd>
+                    </dl>
+                    <ul class="pager">
+                        <li><a class="prev" href="#">Previous</a></li>
+                        <li><a class="next" href="#">Next</a></li>
+                    </ul>
+                </fieldset>
+              </div>
+                    <div class="tab-pane fade" id="5">
+                <fieldset>
+                    <legend>Foto's:</legend>
+                    <dl>
+                        <dt>
+                            
+                        </dt>
+                        <dd class="clearfix">
+                            <input name="filesToUpload[]" id="filesToUpload" accept="image/jpeg" type="file" multiple="" />
+                        </dd>
+                    </dl>
+                    <ul class="pager">
+                        <li><a class="prev" href="#">Previous</a></li>
+                    </ul>
+                    {{ form_widget(addForm._token) }}
+                    <input class="btn btn-large btn-primary" type="submit" name="submit" value="Toevoegen" />
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </form>
+{% endblock %}

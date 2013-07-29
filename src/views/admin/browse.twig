@@ -1,0 +1,84 @@
+{% extends 'adminLayout.twig'%}
+
+{% set pageTitle = 'Immo - browse' %}
+{% set username = username %}
+{% block pageContent%}
+                    <ul class="breadcrumb">
+                        <li class="active">Overzicht</li>
+                    </ul>
+                    <div class="box" id="boxInternships">
+                        <div id="filter" class="pull-left">
+                            {% form_theme filterForm with 'form_errors.twig' %}
+                            <h3>filter</h3>
+                            <form action="{{ path(app.request.attributes.get('_route')) }}" method="POST" {{ form_enctype(filterForm) }}>
+                                   <dl> 
+                                       <dt>
+                                           {{ form_label(filterForm.vastgoed_type) }}
+                                       </dt>
+                                       <dd class="clearfix">
+                                           {{ form_widget(filterForm.vastgoed_type) }}
+                                           {{ form_errors(filterForm.vastgoed_type) }}
+                                       </dd>
+                                       <dt>
+                                           {{ form_label(filterForm.status) }}
+                                       </dt>
+                                       <dd class="clearfix">
+                                           {{ form_widget(filterForm.status) }}
+                                           {{ form_errors(filterForm.status) }}
+                                       </dd>
+                                       <dt>
+                                           {{ form_label(filterForm.provincie) }}
+                                       </dt>
+                                       <dd class="clearfix">
+                                           {{ form_widget(filterForm.provincie) }}
+                                           {{ form_errors(filterForm.provincie) }}
+                                       </dd>
+                                       <dt>
+                                           {{ form_label(filterForm.offset) }}
+                                       </dt>
+                                       <dd class="clearfix">
+                                           {{ form_widget(filterForm.offset) }}
+                                           {{ form_errors(filterForm.offset) }}
+                                       </dd>
+                                   </dl>
+                                   {{ form_widget(filterForm._token) }}
+                                   <input class="button" type="submit" name="submit" value="Filter" />
+                                   <span><a href="{{ path(app.request.attributes.get('_route')) }}?filter=false">Clear Filter</a></span>
+                               </form>
+                        </div>
+                        <h2>Uw aanbod in vastgoed</h2>  
+                        <div class="boxInner">
+                                {% if items %}
+                                <ul>
+                                        {% for item in items %}
+                                        <li id="item-{{ item.Vastgoed_id }}" class="item clearfix">
+                                                <a href="{{ app.url_generator.generate('adm.delete') }}?id={{ item.Vastgoed_id }}"  data-vastgoed-id="{{ item.Vastgoed_id }}" class="delete" data-toggle="tooltip" title="Verwijderen"><i class="icon-trash"></i></a>
+                                                <a href="{{ app.url_generator.generate('adm.edit') }}?id={{ item.Vastgoed_id }}" data-toggle="tooltip" title="Aanpassen" class="edit" ><i class="icon-pencil"></i></a>
+                                                <span>{{ item.Type }} {{ item.Status }} in: {{ item.Locatie }} {{ item.Straat }} prijs: &euro; {{ item.Prijs }}</span>
+                                        </li>
+                                        {% endfor %}
+                                </ul>
+                                {% else %}
+                                    <p>Je hebt geen vastgoed!</p>
+                                {% endif %}
+                                {% if pages > 1 %}
+                                    <div class="pagination">
+                                        <ul>
+                                        
+                                            <li {% if page<=1 %}class="disabled"{% endif %}><a href="{{ path(app.request.attributes.get('_route')) }}?page={{ page-1 }}">&laquo;</a></li>
+                                        
+                                        {% for i in 1..pages %}
+                                            <li {% if page==i %}class="active"{% endif %}><a href="{{ path(app.request.attributes.get('_route')) }}?page={{ i }}">{{ i }}</a></li>
+                                        {% endfor %}
+                                         
+                                            <li {% if page>=pages %}class="disabled"{% endif %}><a href="{{ path(app.request.attributes.get('_route')) }}?page={{ page+1 }}">&raquo;</a></li>
+                                        </ul>
+
+                                    </div>
+                                {% endif %}
+                        </div>
+
+                    </div>
+
+{% endblock %}
+

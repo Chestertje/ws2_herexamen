@@ -1,0 +1,78 @@
+{% extends 'adminLayout.twig'%}
+{% set pageTitle = 'Immo - Profiel aanpassen' %}
+{% set username = username %}
+{% block pageContent%}
+
+        <h2>Profiel aanpassen</h2>
+        <ul class="breadcrumb">
+            <li><a href="{{ app.url_generator.generate('adm.browse') }}">Overzicht</a> <span class="divider">/</span></li>
+            <li class="active">Profiel aanpassen</li>
+        </ul>
+        {% form_theme settingsForm with 'form_errors.twig' %}
+        <form action="#" method="post" {{ form_enctype(settingsForm) }}>
+            <dl> 
+                <dt>
+                    {{ form_label(settingsForm.naam_makelaar) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.naam_makelaar) }}
+                    {{ form_errors(settingsForm.naam_makelaar) }}
+                </dd>
+                <dt>
+                    {{ form_label(settingsForm.contact_email) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.contact_email) }}
+                    {{ form_errors(settingsForm.contact_email) }}
+                </dd>
+                <dt>
+                    {{ form_label(settingsForm.voornaam) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.voornaam) }}
+                    {{ form_errors(settingsForm.voornaam) }}
+                </dd>
+                <dt>
+                    {{ form_label(settingsForm.achternaam) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.achternaam) }}
+                    {{ form_errors(settingsForm.achternaam) }}
+                </dd>
+                <dt>
+                    {{ form_label(settingsForm.locatie) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.locatie) }}
+                    {{ form_errors(settingsForm.locatie) }}
+                </dd>
+                
+                <dt>
+                    {{ form_label(settingsForm.provincie) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.provincie) }}
+                    {{ form_errors(settingsForm.provincie) }}
+                </dd>
+                <dt>
+                        {{ form_label(settingsForm.logo) }}
+                    </dt>
+                    <dd class="clearfix">
+                        {{ form_widget(settingsForm.logo) }}
+                        {{ form_errors(settingsForm.logo) }}
+                    </dd>
+                    <img src="{{ app.request.baseUrl }}/files/images/{{ url }}" class="img-polaroid" />
+                <dt>
+                    {{ form_label(settingsForm.beschrijving) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.beschrijving,{ 'attr': { 'class': 'tinymce' } }) }}
+                    {{ form_errors(settingsForm.beschrijving) }}
+                </dd>
+            </dl>
+            {{ form_widget(settingsForm._token) }}
+            <input type="submit" name="submit" value="Save" />
+            <a href="{{ app.url_generator.generate('adm.browse') }}">cancel</a>
+        </form>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'adminLayout.twig'%}
+{% set username = username %}
+{% set pageTitle = 'Company - Delete internship' %}
+{% block pageContent%}
+
+
+        <h1>Vastgoed Verwijderen</h1>
+        <ul class="breadcrumb">
+            <li><a href="{{ app.url_generator.generate('adm.browse') }}">Overzicht</a> <span class="divider">/</span></li>
+            <li class="active">Vastgoed Verwijderen</li>
+        </ul>
+        <form action="#" method="post" {{ form_enctype(deleteForm) }}>
+            <dl> 
+                <dt>
+                    are you sure you want to delete this item?
+                </dt>
+                <dd class="clearfix">
+                    <input class="btn btn-large btn-primary" type="submit" name="submit" value="Verwijderen" />
+                    <a href="{{ app.url_generator.generate('adm.browse') }}">cancel</a>
+                </dd>
+                
+            </dl>
+            {{ form_widget(deleteForm._token) }}
+            
+        </form>      
+
+{% endblock %}

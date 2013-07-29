@@ -1,0 +1,34 @@
+{% extends 'adminLayout.twig'%}
+{% set pageTitle = 'Immo - Register' %}
+{% set username = '' %}
+{% block pageContent%}
+
+        <form action="{{ path('auth.register') }}" method="post" {{ form_enctype(registerForm) }} class="form-signin">
+            {% form_theme registerForm with 'form_errors.twig' %}
+            
+                    <h2 class="form-signin-heading">Registreer</h2>
+                    {{ form_widget(registerForm.company_name,{ 'attr': {'placeholder': 'Bedrijf naam','class': 'input-block-level'} }) }}
+                    {{ form_errors(registerForm.company_name) }}
+               
+                    {{ form_widget(registerForm.contact_email,{ 'attr': {'placeholder': 'Email adres','class': 'input-block-level'} }) }}
+                    {{ form_errors(registerForm.contact_email) }}
+                
+                    {{ form_widget(registerForm.firstname,{ 'attr': {'placeholder': 'Voornaam','class': 'input-block-level'} }) }}
+                    {{ form_errors(registerForm.firstname) }}
+                
+                    {{ form_widget(registerForm.lastname,{ 'attr': {'placeholder': 'Achternaam','class': 'input-block-level'} }) }}
+                    {{ form_errors(registerForm.lastname) }}
+                    
+                    {{ form_widget(registerForm.password.Password,{ 'attr': {'placeholder': 'Paswoord','class': 'input-block-level'} }) }}                
+                
+                    {{ form_widget(registerForm.password.Password_confirmation,{ 'attr': {'placeholder': 'Bevestig paswoord','class': 'input-block-level'} }) }}
+                    {{ form_errors(registerForm.password.Password) }}
+                
+            </dl>
+            {{ form_widget(registerForm._token) }}
+            <button class="btn btn-large btn-primary" type="submit" name="submit">Registreer</button>
+            <a href="{{ app.url_generator.generate('auth.login') }}">Annuleren</a>
+        </form>
+
+{% endblock %}
+{# empty Twig template #}{# empty Twig template #}
