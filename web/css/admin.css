@@ -37,6 +37,9 @@
       #filter select {
           width: 180px;
       }
+      #filter input[type='text']{
+          width: 166px;
+      }
       .boxInner {
           float:left;
           width: 500px;

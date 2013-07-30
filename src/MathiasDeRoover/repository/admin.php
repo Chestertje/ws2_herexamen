@@ -57,24 +57,39 @@ class admin extends \Knp\Repository {
     public function findContactEmail($email){
         return $this->db->fetchAssoc("SELECT Makelaar_id FROM makelaars WHERE Contact_email=?",array($email));  
     }
-    public function filter($id, array $where, $limit=null ){
+    public function filter($id, array $where,array $like, $limit=null ){
             $whereclause='';
             foreach ($where as $key => $value) {
                 if($value != null){
                     
                     //$value = $app->escape($value);
                     
-                   $whereclause .= " AND $key='".$value . "'";
+                   $whereclause .= " AND $key='".mysql_real_escape_string($value) . "'";
+                }
+            }
+            
+            foreach ($like as $key => $value) {
+                if($value != null){
+                    
+                    //$value = $app->escape($value);
+                    
+                    $whereclause .= " AND $key like '%".mysql_real_escape_string($value) . "%'";
                 }
             }
             
             return $this->db->fetchAll("SELECT vastgoed.*,Vastgoedtypes.*, status.* from vastgoed inner join Vastgoedtypes on vastgoed.Vastgoedtype_id=Vastgoedtypes.Vastgoedtype_id inner join status on status.Status_id=vastgoed.Status_id  WHERE Makelaar_id=?".$whereclause .  $limit,array($id));
         }
-    public function count($id, array $where=[]){
+    public function count($id, array $where=[],array $like=[]){
         $whereclause='';
         foreach ($where as $key => $value) {
             if($value != null){
-                   $whereclause .= " AND $key='".$value . "' ";
+                   $whereclause .= " AND $key='".mysql_real_escape_string($value) . "' ";
+            }
+
+        }
+        foreach ($like as $key => $value) {
+            if($value != null){
+                   $whereclause .= " AND $key LIKE '%".mysql_real_escape_string($value) . "%' ";
             }
 
         }

@@ -13,6 +13,13 @@
                             <form action="{{ path(app.request.attributes.get('_route')) }}" method="POST" {{ form_enctype(filterForm) }}>
                                    <dl> 
                                        <dt>
+                                           {{ form_label(filterForm.straat) }}
+                                       </dt>
+                                       <dd class="clearfix">
+                                           {{ form_widget(filterForm.straat) }}
+                                           {{ form_errors(filterForm.straat) }}
+                                       </dd>
+                                       <dt>
                                            {{ form_label(filterForm.vastgoed_type) }}
                                        </dt>
                                        <dd class="clearfix">

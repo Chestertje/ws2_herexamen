@@ -42,6 +42,7 @@ class AdminController implements ControllerProviderInterface {
                 return $app->redirect($app['url_generator']->generate('adm.browse'));
             }
             $where = [];
+            $like = [];
             $username = $app['session']->get('username');
             $id = $app['session']->get('company_id');
             $pagenum = (($app['request']->get('page')== 0||$app['request']->get('page')== null) && !is_numeric($app['request']->get('page'))) ? 1 : $app['request']->get('page');
@@ -92,6 +93,10 @@ class AdminController implements ControllerProviderInterface {
                 'choices' => $offsetOptions,
                 'empty_value' => false,
                 'required' => false
+            ))->add('straat', 'text', array(
+                'data' => $filter['vastgoed.Straat'],
+                'required' => false,
+                'constraints' => array(new Assert\Regex(array('pattern' => "/^[a-z\d\-_\s]+$/i",'match' => true,'message' => 'Enkel letters en cijfers')))
             ));
             if ('POST' == $app['request']->getMethod()) {
             $filterForm->bind($app['request']);
@@ -104,14 +109,18 @@ class AdminController implements ControllerProviderInterface {
                         "vastgoed.Vastgoedtype_id" => $data['vastgoed_type'],
                         "vastgoed.Status_id" => $data["status"]
                     ];
+                    $like = [
+                        "vastgoed.Straat" => $app->escape($data['straat'])
+                    ];
                     $session = [
                         "vastgoed.Provincie_id" => $data['provincie'],
                         "vastgoed.Vastgoedtype_id" => $data['vastgoed_type'],
                         "vastgoed.Status_id" => $data["status"],
-                        "offset" => $data['offset']
+                        "offset" => $data['offset'],
+                        "vastgoed.Straat" => $app->escape($data['straat'])
                     ];
                     $app['session']->set('filter', $session);
-
+                    
                     return $app->redirect($app['url_generator']->generate('adm.browse'));
                 }
             }
@@ -120,30 +129,38 @@ class AdminController implements ControllerProviderInterface {
                 $filter = [
                         "vastgoed.Provincie_id" => $app['session']->get('filter')['vastgoed.Provincie_id'],
                         "vastgoed.Vastgoedtype_id" => $app['session']->get('filter')['vastgoed.Vastgoedtype_id'],
-                        "vastgoed.Status_id" => $app['session']->get('filter')["vastgoed.Status_id"]
+                        "vastgoed.Status_id" => $app['session']->get('filter')["vastgoed.Status_id"],
+                        
                     ];
-                $limit = $this->paging($app, $filter, $app['request']->get('page'), $offsetOptions[$offset], $id );
-                $items = $app['admin']->filter($id, $filter, $limit);
+                $like = [
+                    "vastgoed.Straat" => $app['session']->get('filter')["vastgoed.Straat"]
+                ];
+                $limit = $this->paging($app, $filter, $like, $app['request']->get('page'), $offsetOptions[$offset], $id );
+                $items = $app['admin']->filter($id, $filter,$like, $limit);
+                
                 return $app['twig']->render('admin/browse.twig', array('username' => $username,'items' => $items,'pages' => $this->last, 'page' => $pagenum , 'filterForm' => $filterForm->createView()));
 
 
             }
-            $limit = $this->paging($app,$where,$pagenum,$offsetOptions[$offset], $id);
-            $items = $app['admin']->filter($id, $where, $limit);
+            
+            $limit = $this->paging($app,$where, $like, $pagenum,$offsetOptions[$offset], $id);
+            $items = $app['admin']->filter($id, $where, $like, $limit);
             return $app['twig']->render('admin/browse.twig', array('username' => $username, 'items' => $items, 'pages' => $this->last, 'page' => $pagenum, 'filterForm' => $filterForm->createView()));
         }
         var $last;
-        public function paging(Application $app, $array, $pagenum=1, $page_rows=10, $id){
+        public function paging(Application $app, $array, $like, $pagenum=1, $page_rows=10, $id){
             if (!(isset($pagenum)))
             {
                 $pagenum = 1;
             } 
 
 
-            $rows = $app['admin']->count($id ,$array)['count'];
+            $rows = $app['admin']->count($id ,$array, $like)['count'];
+            
             //$rows = $temp['count'];
             //This tells us the page number of our last page 
             $this->last = ceil($rows/$page_rows); 
+            
             //print_r('aantal paginas:'.$this->last);
             //this makes sure the page number isn't below one, or more than our maximum pages 
             if ($pagenum > $this->last) 
