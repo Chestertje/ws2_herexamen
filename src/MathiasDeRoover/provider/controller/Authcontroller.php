@@ -59,7 +59,7 @@ class AuthController implements ControllerProviderInterface {
                         $id = $app['auth']->getUser($contact_email);
                         if($id){
                             $password = $app['auth']->getPassword($contact_email);
-                            if($password['Paswoord'] == $data['password']){
+                            if($password['Paswoord'] == hash("sha512", $data['password'])){
                                 $app['session']->set('username', $id['Voornaam']);
                                 $app['session']->set('company_id', $id['Makelaar_id']);
                                 
@@ -117,7 +117,7 @@ class AuthController implements ControllerProviderInterface {
                                         "Contact_email" => $contact_email,
                                         "Voornaam" => $data['firstname'],
                                         "Achternaam" => $data['lastname'],
-                                        "Paswoord" => $data['password']
+                                        "Paswoord" => hash("sha512", $data['password'])
                                     ];
                                     $app['auth']->addCompany($array);
                                     $id=$app['auth']->getUser($contact_email);
