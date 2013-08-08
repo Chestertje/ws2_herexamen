@@ -59,12 +59,15 @@ class admin extends \Knp\Repository {
     }
     public function filter($id, array $where,array $like, $limit=null ){
             $whereclause='';
+            $test = array();
+            array_push($test, $id);
             foreach ($where as $key => $value) {
                 if($value != null){
                     
                     //$value = $app->escape($value);
                     
-                   $whereclause .= " AND $key='".mysql_real_escape_string($value) . "'";
+                   $whereclause .= " AND $key=?";
+                   array_push($test, $value);
                 }
             }
             
@@ -73,27 +76,33 @@ class admin extends \Knp\Repository {
                     
                     //$value = $app->escape($value);
                     
-                    $whereclause .= " AND $key like '%".mysql_real_escape_string($value) . "%'";
+                    $whereclause .= " AND $key like ?";
+                    array_push($test, '%'.$value.'%');
                 }
             }
             
-            return $this->db->fetchAll("SELECT vastgoed.*,Vastgoedtypes.*, status.* from vastgoed inner join Vastgoedtypes on vastgoed.Vastgoedtype_id=Vastgoedtypes.Vastgoedtype_id inner join status on status.Status_id=vastgoed.Status_id  WHERE Makelaar_id=?".$whereclause .  $limit,array($id));
+            return $this->db->fetchAll("SELECT vastgoed.*,Vastgoedtypes.*, status.* from vastgoed inner join Vastgoedtypes on vastgoed.Vastgoedtype_id=Vastgoedtypes.Vastgoedtype_id inner join status on status.Status_id=vastgoed.Status_id  WHERE Makelaar_id=?".$whereclause .  $limit,$test);
         }
     public function count($id, array $where=[],array $like=[]){
         $whereclause='';
+        $test = array();
+        array_push($test, $id);
         foreach ($where as $key => $value) {
             if($value != null){
-                   $whereclause .= " AND $key='".mysql_real_escape_string($value) . "' ";
+                   $whereclause .= " AND $key=? ";
+                   array_push($test, $value);
             }
 
         }
         foreach ($like as $key => $value) {
             if($value != null){
-                   $whereclause .= " AND $key LIKE '%".mysql_real_escape_string($value) . "%' ";
+                   $whereclause .= " AND $key LIKE ? ";
+                   array_push($test, '%'.$value.'%');
             }
 
         }
-        return $this->db->fetchAssoc('SELECT COUNT(*) as count from vastgoed Where Makelaar_id=?' . $whereclause , array($id));
+        
+        return $this->db->fetchAssoc('SELECT COUNT(*) as count from vastgoed Where Makelaar_id=?' . $whereclause , $test);
     }
 }
 ?>

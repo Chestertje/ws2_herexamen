@@ -55,7 +55,6 @@ class AuthController implements ControllerProviderInterface {
                 if ($loginform->isValid()) {
                         $data = $loginform->getData();
                         $contact_email = strtolower($data['contact_email']);
-
                         $id = $app['auth']->getUser($contact_email);
                         if($id){
                             $password = $app['auth']->getPassword($contact_email);

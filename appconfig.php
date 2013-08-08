@@ -3,7 +3,7 @@ return array(
     'db.options' => array(
         'dbname' => 'immo',
         'user' => 'root',
-        'password' => '',
+        'password' => 'Azerty123',
         'host' => 'localhost',
         'driver' => 'pdo_mysql'
     )

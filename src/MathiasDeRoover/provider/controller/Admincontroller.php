@@ -41,6 +41,7 @@ class AdminController implements ControllerProviderInterface {
                 $app['session']->remove('filter');
                 return $app->redirect($app['url_generator']->generate('adm.browse'));
             }
+            $isFiltered = false;
             $where = [];
             $like = [];
             $username = $app['session']->get('username');
