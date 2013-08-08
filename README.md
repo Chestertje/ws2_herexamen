@@ -1,11 +1,9 @@
 # oplossing project
-url: http://mathiasderoover.ikdoeict.be/praxischester/web/
 account kan aangemaakt worden met register
 
-	isaac@upwithpeople.org     Azerty123
-	koen@robertbosch.com	Azerty123
-	sara@traveledventures.org	Azerty123
-	freek@fleishmanhillard.com	Azerty123
+account met gegevens in:
+login: chester@chester.com
+password: Azerty123
 
 ## Requirements
 
