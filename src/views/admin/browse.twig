@@ -56,12 +56,14 @@
                         <h2>Uw aanbod in vastgoed</h2>  
                         <div class="boxInner">
                                 {% if items %}
-                                <ul>
+                                <ul id="items">
                                         {% for item in items %}
                                         <li id="item-{{ item.Vastgoed_id }}" class="item clearfix">
                                                 <a href="{{ app.url_generator.generate('adm.delete') }}?id={{ item.Vastgoed_id }}"  data-vastgoed-id="{{ item.Vastgoed_id }}" class="delete" data-toggle="tooltip" title="Verwijderen"><i class="icon-trash"></i></a>
                                                 <a href="{{ app.url_generator.generate('adm.edit') }}?id={{ item.Vastgoed_id }}" data-toggle="tooltip" title="Aanpassen" class="edit" ><i class="icon-pencil"></i></a>
-                                                <span>{{ item.Type }} {{ item.Status }} in: {{ item.Locatie }} {{ item.Straat }} prijs: &euro; {{ item.Prijs }}</span>
+                                                <p><b>{{ item.Type }}</b> te <b>{{ item.Locatie }}</b></p>
+                                                <p>Straat: <b>{{ item.Straat }}</b></p>
+                                                <p>Aangeboden als: <b>{{ item.Status }}</b></p><p>Prijs: <b>&euro; {{ item.Prijs }}</b></p>
                                         </li>
                                         {% endfor %}
                                 </ul>
