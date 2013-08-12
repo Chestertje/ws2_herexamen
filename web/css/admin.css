@@ -61,7 +61,12 @@
       #addForm_garage input[type="radio"],#editForm_garage input[type="radio"]{
           margin: -1px 0 0;
       }
+      .tabs {
+          width: 600px;
+          margin: 0 auto;
+      }
       .boxInner {
+          padding-top: 5px;
           background: #fafafa;
           border: 1px solid #e5e5e5;
         -webkit-border-radius: 5px;
@@ -77,11 +82,18 @@
           margin-bottom: 5px;
       }
       #saveButtons {
-          margin-bottom: 10px;
+          
+          width: 380px;
+          margin: 0 auto;
+          margin-bottom: 15px;
+          
       }
       #imageContainer {
           margin: 0 auto;
           width: 510px;
+      }
+      #items li:hover{
+          background: white;
       }
       #items li{
           padding-left: 5px;
@@ -110,9 +122,7 @@
       #items li p b {
           color: #08c;
       }
-      #items li:nth-child(even){
-          background: #f5f5f5;
-      }
+      
       .image {
           position: relative;
           height: 150px;

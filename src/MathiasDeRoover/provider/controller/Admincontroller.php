@@ -138,7 +138,6 @@ class AdminController implements ControllerProviderInterface {
                 ];
                 $limit = $this->paging($app, $filter, $like, $app['request']->get('page'), $offsetOptions[$offset], $id );
                 $items = $app['admin']->filter($id, $filter,$like, $limit);
-                
                 return $app['twig']->render('admin/browse.twig', array('username' => $username,'items' => $items,'pages' => $this->last, 'page' => $pagenum , 'filterForm' => $filterForm->createView()));
 
 

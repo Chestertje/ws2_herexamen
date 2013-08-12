@@ -12,7 +12,9 @@
         {% form_theme editForm with 'form_errors.twig' %}
         <form id="editForm" action="#" method="post" {{ form_enctype(editForm) }}> 
             
-            <div id="saveButtons">
+            
+            <div class="tabs">
+                <div id="saveButtons">
                 <button type="submit" name="submit" class="btn btn-large btn-success">
                     <i class="icon-white icon-ok"></i> Aanpassingen opslaan
                 </button>
@@ -20,7 +22,6 @@
                     <i class="icon-white icon-remove"></i> Annuleren
                 </a>
             </div>
-            <div class="bs-docs-example">
             <ul id="myTab" class="nav nav-tabs">
               <li class="active"><a href="#1" data-toggle="tab">Locatie</a></li>
               <li class=""><a href="#2" data-toggle="tab">Informatie</a></li>

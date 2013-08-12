@@ -10,6 +10,7 @@
         </ul>
         {% form_theme settingsForm with 'form_errors.twig' %}
         <form action="#" method="post" {{ form_enctype(settingsForm) }}>
+            <div class="tabs">
             <div id="saveButtons">
                 <button type="submit" name="Save" class="btn btn-large btn-success">
                     <i class="icon-white icon-ok"></i> Aanpassingen opslaan
@@ -101,6 +102,7 @@
                 <a href="{{ app.url_generator.generate('adm.browse') }}" class="btn btn-danger">
                     <i class="icon-white icon-remove"></i> Annuleren
                 </a>
+            </div>
             </div>
         </form>
 
