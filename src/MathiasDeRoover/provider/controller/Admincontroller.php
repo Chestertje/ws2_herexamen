@@ -202,6 +202,9 @@ class AdminController implements ControllerProviderInterface {
                     'required' => false,
                     'data' => $company['Locatie'],
                     'constraints' => array(new Assert\Length(array('min' => 3)))
+                ))->add('straat', 'text', array(
+                    'data' => $company['Straat'],
+                    'required' => false
                 ))->add('provincie', 'choice', array(
                     'empty_value' => 'Kies een provincie',
                     'choices' => $provinces,
@@ -270,17 +273,20 @@ class AdminController implements ControllerProviderInterface {
                                             "locatie" => $data['locatie'],
                                             'Beschrijving' => $data['beschrijving'],
                                             'Telefoon_nr' => $data['telefoon_nr'],
+                                            'Straat' => $data['straat'],
                                         ];
+                                        //werkt niet als antwerpen geslecteerd is. geen idee waarom
+                                        //$array = array_diff($arraycomp, $company);
                                         
-                                        $array = array_diff($arraycomp, $company);
-                                        if($array){
-                                            $app['admin']->updateCompany($id,$array);
+                                        //print_r($arraycomp);
+                                        
+                                        if($arraycomp){
+                                            $app['admin']->updateCompany($id,$arraycomp);
+                                            
                                         }
-                                        if($array['Voornaam']){
-                                            $app['session']->set('username', $array['Voornaam']);
+                                        if($arraycomp['Voornaam'] != $app['session']->get('username')){
+                                            $app['session']->set('username', $arraycomp['Voornaam']);
                                         }
-                                        //$app['company']->addCompany($array);
-
                                         return $app->redirect($app['url_generator']->generate('adm.profile').'?profile=true');
                                     }
                                 }
@@ -380,7 +386,6 @@ class AdminController implements ControllerProviderInterface {
                         ))->add('oppervlakte', 'number', array(
                             'data' => $vastgoed['Oppervlakte'],
                             'required' => false,
-                            'constraints' => array(new Assert\NotBlank())
                         ))->add('garage', 'choice', array(
                             'choices' => array(1 => "ja",0 => "neen"),
                             'data' => $vastgoed['Garage'],
@@ -566,7 +571,6 @@ class AdminController implements ControllerProviderInterface {
                     'required' => false
                 ))->add('oppervlakte', 'number', array(
                     'required' => false,
-                    'constraints' => array(new Assert\NotBlank())
                 ))->add('garage', 'choice', array(
                     'choices' => array(1 => "ja",0 => "neen"),
                     'data' => 1,

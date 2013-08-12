@@ -9,7 +9,7 @@
                     <div class="box" id="boxInternships">
                         <div id="filter" class="pull-left">
                             {% form_theme filterForm with 'form_errors.twig' %}
-                            <h3>filter</h3>
+                            <h3>Filter</h3>
                             <form action="{{ path(app.request.attributes.get('_route')) }}" method="POST" {{ form_enctype(filterForm) }}>
                                    <dl> 
                                        <dt>
@@ -49,7 +49,7 @@
                                        </dd>
                                    </dl>
                                    {{ form_widget(filterForm._token) }}
-                                   <input class="button" type="submit" name="submit" value="Filter" />
+                                   <input class="btn btn-primary" type="submit" name="submit" value="Filter" />
                                    <span><a href="{{ path(app.request.attributes.get('_route')) }}?filter=false">Filter verwijderen</a></span>
                                </form>
                         </div>

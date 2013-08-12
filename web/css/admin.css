@@ -51,7 +51,13 @@
       #addForm_garage, #editForm_garage {
           margin-bottom: 5px;
       }
-      
+      .profilePic {
+          max-height: 200px;
+          max-width: 200px;
+      }
+      form dt label{
+          color: #0480be;
+      }
       #addForm_garage input[type="radio"],#editForm_garage input[type="radio"]{
           margin: -1px 0 0;
       }
@@ -60,7 +66,9 @@
           margin-right: 10px;
           margin-bottom: 5px;
       }
-      
+      #saveButtons {
+          margin-bottom: 10px;
+      }
       #imageContainer {
           margin: 0 auto;
           width: 510px;

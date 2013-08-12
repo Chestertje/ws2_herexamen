@@ -10,6 +10,14 @@
         </ul>
         {% form_theme settingsForm with 'form_errors.twig' %}
         <form action="#" method="post" {{ form_enctype(settingsForm) }}>
+            <div id="saveButtons">
+                <button type="submit" name="Save" class="btn btn-large btn-success">
+                    <i class="icon-white icon-ok"></i> Aanpassingen opslaan
+                </button>
+                <a href="{{ app.url_generator.generate('adm.browse') }}" class="btn btn-danger">
+                    <i class="icon-white icon-remove"></i> Annuleren
+                </a>
+            </div>
             <dl> 
                 <dt>
                     {{ form_label(settingsForm.naam_makelaar) }}
@@ -53,7 +61,13 @@
                     {{ form_widget(settingsForm.locatie) }}
                     {{ form_errors(settingsForm.locatie) }}
                 </dd>
-                
+                <dt>
+                    {{ form_label(settingsForm.straat) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.straat,{ 'attr': {'placeholder': 'Straat + nr'} }) }}
+                    {{ form_errors(settingsForm.straat) }}
+                </dd>
                 <dt>
                     {{ form_label(settingsForm.provincie) }}
                 </dt>
@@ -68,7 +82,9 @@
                     {{ form_widget(settingsForm.logo) }}
                     {{ form_errors(settingsForm.logo) }}
                 </dd>
-                <img src="{{ app.request.baseUrl }}/files/images/{{ url }}" class="img-polaroid" />
+                <dd class="clearfix">
+                    <img class="profilePic" src="{{ app.request.baseUrl }}/files/images/{{ url }}" class="img-polaroid" />
+                </dd>
                 <dt>
                     {{ form_label(settingsForm.beschrijving) }}
                 </dt>
@@ -78,8 +94,14 @@
                 </dd>
             </dl>
             {{ form_widget(settingsForm._token) }}
-            <input type="submit" name="submit" value="Save" />
-            <a href="{{ app.url_generator.generate('adm.browse') }}">cancel</a>
+            <div id="saveButtons">
+                <button type="submit" name="Save" class="btn btn-large btn-success">
+                    <i class="icon-white icon-ok"></i> Aanpassingen opslaan
+                </button>
+                <a href="{{ app.url_generator.generate('adm.browse') }}" class="btn btn-danger">
+                    <i class="icon-white icon-remove"></i> Annuleren
+                </a>
+            </div>
         </form>
 
 {% endblock %}
