@@ -40,6 +40,13 @@
                     {{ form_errors(settingsForm.achternaam) }}
                 </dd>
                 <dt>
+                    {{ form_label(settingsForm.telefoon_nr) }}
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.telefoon_nr) }}
+                    {{ form_errors(settingsForm.telefoon_nr) }}
+                </dd>
+                <dt>
                     {{ form_label(settingsForm.locatie) }}
                 </dt>
                 <dd class="clearfix">
@@ -56,12 +63,12 @@
                 </dd>
                 <dt>
                         {{ form_label(settingsForm.logo) }}
-                    </dt>
-                    <dd class="clearfix">
-                        {{ form_widget(settingsForm.logo) }}
-                        {{ form_errors(settingsForm.logo) }}
-                    </dd>
-                    <img src="{{ app.request.baseUrl }}/files/images/{{ url }}" class="img-polaroid" />
+                </dt>
+                <dd class="clearfix">
+                    {{ form_widget(settingsForm.logo) }}
+                    {{ form_errors(settingsForm.logo) }}
+                </dd>
+                <img src="{{ app.request.baseUrl }}/files/images/{{ url }}" class="img-polaroid" />
                 <dt>
                     {{ form_label(settingsForm.beschrijving) }}
                 </dt>

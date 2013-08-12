@@ -210,6 +210,10 @@ class AdminController implements ControllerProviderInterface {
                 ))->add('beschrijving', 'text', array(
                     'data' => $company['Beschrijving'],
                     'required' => false
+                ))->add('telefoon_nr', 'text', array(
+                    'data' => $company['Telefoon_nr'],
+                    'required' => false,
+                    'constraints' => array(new Assert\Regex(array('pattern' => "^(0\d\/\d{3}\.\d{2}\.\d{2}|0\d{2}\/\d{2}\.\d{2}\.\d{2})$^",'match' => true,'message' => 'formaat moet gelijk zijn aan: (x)xx/xxx.xx.xx')))
                 ))->add('logo', 'file', array(
                     'required' => false,
                     'constraints' => array(new Assert\File(array('maxSize' => '2M', 'uploadIniSizeErrorMessage'=> 'The file is too large. Allowed maximum size is 2MB')))
@@ -222,7 +226,7 @@ class AdminController implements ControllerProviderInterface {
                                 $files = $app['request']->files->get($settingsForm->getName());
                                 if (isset($files['logo'])) {
                                     
-                                    if (('.jpg' == substr($files['logo']->getClientOriginalName(), -4))) {
+                                    if (('.jpg' == substr($files['logo']->getClientOriginalName(), -4)) || ('.JPG' == substr($files['logo']->getClientOriginalName(), -4))|| ('.jpeg' == substr($files['logo']->getClientOriginalName(), -5))) {
                                         
                                             $files['logo']->move($app['company.base_path'], $app['session']->get('company_id') . '.jpg');
                                         
@@ -264,7 +268,8 @@ class AdminController implements ControllerProviderInterface {
                                             "Provincie_id" => $data['provincie'],
                                             "Logo" => (empty($data['logo'])) ? $company['Logo'] : $id.'.jpg' ,
                                             "locatie" => $data['locatie'],
-                                            'Beschrijving' => $data['beschrijving']
+                                            'Beschrijving' => $data['beschrijving'],
+                                            'Telefoon_nr' => $data['telefoon_nr'],
                                         ];
                                         
                                         $array = array_diff($arraycomp, $company);
