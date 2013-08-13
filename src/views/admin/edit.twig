@@ -10,7 +10,7 @@
             <li class="active">Vastgoed aanpassen</li>
         </ul>
         {% form_theme editForm with 'form_errors.twig' %}
-        <form id="editForm" action="#" method="post" {{ form_enctype(editForm) }}> 
+        <form id="editForm" class="form-horizontal" action="#" method="post" {{ form_enctype(editForm) }}> 
             
             
             <div class="tabs">
@@ -33,29 +33,30 @@
               <div class="tab-pane fade active in" id="1">
                 <fieldset>
                     <legend>Locatie:</legend>
-                    <dl> 
-                        <dt>
-                            {{ form_label(editForm.plaats) }}
-                        </dt>
-                        <dd class="clearfix">
+                    <div class="control-group">
+                        {{ form_label(editForm.plaats, null, {'label_attr': {'class': 'control-label'}}) }} 
+                        
+                        <div class="controls">
                             {{ form_widget(editForm.plaats,{ 'attr': {'placeholder': 'Plaats'} }) }}
                             {{ form_errors(editForm.plaats) }}
-                        </dd>
-                        <dt>
-                            {{ form_label(editForm.provincie) }}
-                        </dt>
-                        <dd class="clearfix">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(editForm.provincie, null, {'label_attr': {'class': 'control-label'}}) }} 
+                        
+                        <div class="controls">
                             {{ form_widget(editForm.provincie) }}
                             {{ form_errors(editForm.provincie) }}
-                        </dd>
-                        <dt>
-                            {{ form_label(editForm.straat) }}
-                        </dt>
-                        <dd class="clearfix">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(editForm.straat, null, {'label_attr': {'class': 'control-label'}}) }} 
+                        
+                        <div class="controls">
                             {{ form_widget(editForm.straat,{ 'attr': {'placeholder': 'Straat + nr'} }) }}
                             {{ form_errors(editForm.straat) }}
-                        </dd>
-                    </dl>
+                        </div>
+                    </div>
                     <ul class="pager">
                         <li><a class="next" href="#">Next</a></li>
                     </ul>
@@ -64,60 +65,64 @@
               <div class="tab-pane fade " id="2">
                 <fieldset>
                     <legend>Informatie:</legend>
-                    <dl>
-                        <dt>
-                            {{ form_label(editForm.vastgoed_type) }}
-                        </dt>
-                        <dd class="clearfix">
+                    <div class="control-group">
+                        {{ form_label(editForm.vastgoed_type, null, {'label_attr': {'class': 'control-label'}}) }} 
+                        
+                        <div class="controls">
                             {{ form_widget(editForm.vastgoed_type) }}
                             {{ form_errors(editForm.vastgoed_type) }}
-                        </dd>
-                        <div id="woningen">
-                            <dt>
-                                {{ form_label(editForm.bebouwing_type) }}
-                            </dt>
+                        </div>
+                    </div>
+                    <div id="woningen">
+                        <div class="control-group">
+                            {{ form_label(editForm.bebouwing_type, null, {'label_attr': {'class': 'control-label'}}) }} 
 
-                            <dd class="clearfix">
+                            <div class="controls">
                                 {{ form_widget(editForm.bebouwing_type) }}
                                 {{ form_errors(editForm.bebouwing_type) }}
-                            </dd>
-                            <dt>
-                                {{ form_label(editForm.aantal_slaapkamers) }}
-                            </dt>
-                            <dd class="clearfix">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(editForm.aantal_slaapkamers, null, {'label_attr': {'class': 'control-label'}}) }} 
+
+                            <div class="controls">
                                 {{ form_widget(editForm.aantal_slaapkamers) }}
                                 {{ form_errors(editForm.aantal_slaapkamers) }}
-                            </dd>
-                            <dt>
-                                {{ form_label(editForm.aantal_kamers) }}
-                            </dt>
-                            <dd class="clearfix">
+                        </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(editForm.aantal_kamers, null, {'label_attr': {'class': 'control-label'}}) }} 
+
+                            <div class="controls">
                                 {{ form_widget(editForm.aantal_kamers) }}
                                 {{ form_errors(editForm.aantal_kamers) }}
-                            </dd>
-                            <dt>
-                                {{ form_label(editForm.bouwjaar) }}
-                            </dt>
-                            <dd class="clearfix">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(editForm.bouwjaar, null, {'label_attr': {'class': 'control-label'}}) }} 
+
+                            <div class="controls">
                                 {{ form_widget(editForm.bouwjaar) }}
                                 {{ form_errors(editForm.bouwjaar) }}
-                            </dd>
-                            <dt>
-                                {{ form_label(editForm.garage) }}
-                            </dt>
-                            <dd class="clearfix">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(editForm.garage, null, {'label_attr': {'class': 'control-label'}}) }} 
+
+                            <div class="controls">
                                 {{ form_widget(editForm.garage) }}
                                 {{ form_errors(editForm.garage) }}
-                            </dd>
+                            </div>
                         </div>
-                        <dt>
-                            {{ form_label(editForm.oppervlakte) }}
-                        </dt>
-                        <dd class="clearfix">
-                            {{ form_widget(editForm.oppervlakte) }}
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(editForm.oppervlakte, null, {'label_attr': {'class': 'control-label'}}) }} 
+                        
+                        <div class="controls">
+                            {{ form_widget(editForm.oppervlakte,{ 'attr': {'placeholder': 'Oppervlakte'} }) }}
                             {{ form_errors(editForm.oppervlakte) }}
-                        </dd>
-                    </dl>
+                        </div>
+                    </div>
                     <ul class="pager">
                         <li><a class="prev" href="#">Previous</a></li>
                         <li><a class="next" href="#">Next</a></li>
@@ -125,48 +130,43 @@
                 </fieldset>
                 </div>
                 <div class="tab-pane fade" id="3">
-                  <fieldset>
-                      <legend>Aanbod:</legend>
-                      <dl>
-                          <dt>
-                              {{ form_label(editForm.status_vastgoed) }}
-                          </dt>
-                          <dd class="clearfix">
-                              {{ form_widget(editForm.status_vastgoed) }}
-                              {{ form_errors(editForm.status_vastgoed) }}
-                          </dd>
-                          <dt>
-                              {{ form_label(editForm.prijs) }}
-                          </dt>
-                          <dd class="clearfix">
-                              {{ form_widget(editForm.prijs,{ 'attr': {'placeholder': 'Prijs'} }) }}
-                              {{ form_errors(editForm.prijs) }}
-                          </dd>
-                      </dl>
-                  </fieldset>
-                        <ul class="pager">
-                          <li><a class="prev" href="#">Previous</a></li>
-                          <li><a class="next" href="#">Next</a></li>
-                      </ul>
-                </div>
-                <div class="tab-pane fade" id="4">
-                  <fieldset>
-                      <legend>Beschrijving:</legend>
-                      <dl>
-                          <dt>
-                              {{ form_label(editForm.beschrijving) }}
-                          </dt>
-                          <dd class="clearfix">
-                              {{ form_widget(editForm.beschrijving,{ 'attr': { 'class': 'tinymce' } }) }}
-                              {{ form_errors(editForm.beschrijving) }}
-                          </dd>
-                      </dl>
+                <fieldset>
+                    <legend>Aanbod:</legend>
+                    <div class="control-group">
+                        {{ form_label(editForm.status_vastgoed, null, {'label_attr': {'class': 'control-label'}}) }} 
+
+                        <div class="controls">
+                            {{ form_widget(editForm.status_vastgoed) }}
+                            {{ form_errors(editForm.status_vastgoed) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(editForm.prijs, null, {'label_attr': {'class': 'control-label'}}) }} 
+
+                        <div class="controls">
+                            {{ form_widget(editForm.prijs,{ 'attr': {'placeholder': 'Prijs'} }) }}
+                            {{ form_errors(editForm.prijs) }}
+                        </div>
+                    </div>
                       <ul class="pager">
                           <li><a class="prev" href="#">Previous</a></li>
                           <li><a class="next" href="#">Next</a></li>
                       </ul>
-                      
                   </fieldset>
+                        
+                </div>
+                <div class="tab-pane fade" id="4">
+                    <fieldset>
+                        <legend>Beschrijving:</legend>
+
+                        {{ form_widget(editForm.beschrijving,{ 'attr': { 'class': 'tinymce' } }) }}
+                        {{ form_errors(editForm.beschrijving) }}
+
+                        <ul class="pager">
+                            <li><a class="prev" href="#">Previous</a></li>
+                            <li><a class="next" href="#">Next</a></li>
+                        </ul>
+                    </fieldset>
                 </div>
                 <div class="tab-pane fade" id="5">
                 <fieldset>

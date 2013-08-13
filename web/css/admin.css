@@ -55,7 +55,7 @@
           max-height: 200px;
           max-width: 200px;
       }
-      form dt label{
+      form label{
           color: #0480be;
       }
       #addForm_garage input[type="radio"],#editForm_garage input[type="radio"]{

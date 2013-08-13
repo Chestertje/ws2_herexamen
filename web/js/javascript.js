@@ -70,8 +70,18 @@ $(".delete").click(function (e) {
     
     
 });
- $("#addForm_vastgoed_type").change(function () {
+$("#addForm_vastgoed_type").change(function () {
      var keuze = $("#addForm_vastgoed_type :selected").text();
+    if(keuze ==="Grond" || keuze ==="Kot/Kamer" || keuze==="Bedrijfsvastgoed"|| keuze==="Garage"){
+        $("#woningen").slideUp(400);
+    }
+    else{
+        $("#woningen").slideDown(400);
+    }
+        
+});
+$("#editForm_vastgoed_type").change(function () {
+     var keuze = $("#editForm_vastgoed_type :selected").text();
     if(keuze ==="Grond" || keuze ==="Kot/Kamer" || keuze==="Bedrijfsvastgoed"|| keuze==="Garage"){
         $("#woningen").slideUp(400);
     }
