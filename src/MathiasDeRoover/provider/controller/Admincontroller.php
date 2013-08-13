@@ -331,7 +331,7 @@ class AdminController implements ControllerProviderInterface {
                         $imagesArr = scandir("uploads/".$id. '/', 1);
                         
                         foreach($imagesArr as $image ){
-                            if('.jpg' == substr($image, -4)){
+                            if(('.jpg' == substr($image, -4))||('.JPG' == substr($image, -4))||('.jpeg' == substr($image, -5))){
                                 array_push($images, $image);
 
                             }
@@ -447,7 +447,7 @@ class AdminController implements ControllerProviderInterface {
                                                 mkdir('uploads/'.$vastgoed['Vastgoed_id'], 0777, true);
                                             }
                                             
-                                            if (('.jpg' == substr($name, -4))) {
+                                            if (('.jpg' == substr($name, -4))||('.JPG' == substr($name, -4))||('.jpeg' == substr($name, -5))) {
                                                 move_uploaded_file( $_FILES["filesToUpload"]["tmp_name"][$key], "uploads/" . $vastgoed['Vastgoed_id'] .'/'. $_FILES['filesToUpload']['name'][$key]);
                                                 echo "uploads/" . $vastgoed['Vastgoed_id'] .'/'. $_FILES['filesToUpload']['name'][$key];
                                                 
@@ -618,7 +618,7 @@ class AdminController implements ControllerProviderInterface {
                                         if (!file_exists('uploads/'.$app['admin']->getLastInsert($app['session']->get('company_id'))['Vastgoed_id'])) {
                                             mkdir('uploads/'.$app['admin']->getLastInsert($app['session']->get('company_id'))['Vastgoed_id'], 0777, true);
                                         }
-                                        if (('.jpg' == substr($name, -4))) {
+                                        if (('.jpg' == substr($name, -4))||('.JPG' == substr($name, -4))||('.jpeg' == substr($name, -5))) {
                                         move_uploaded_file( $_FILES["filesToUpload"]["tmp_name"][$key], "uploads/".$app['admin']->getLastInsert($app['session']->get('company_id'))['Vastgoed_id'] .'/'. $_FILES['filesToUpload']['name'][$key]);
                                         }
                                     }
