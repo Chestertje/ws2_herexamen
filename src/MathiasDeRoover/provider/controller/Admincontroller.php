@@ -393,22 +393,16 @@ class AdminController implements ControllerProviderInterface {
                             'required' => false,
                             'empty_value' => false,
                             'constraints' => array(new Assert\NotBlank())
-                        ))->add('files', 'file', array(
-                                'label' => "Choose 1 - 5 pictures",
-                                "attr" => array(
-                                                "multiple" => "multiple",
-                                                "name" => "files[]",
-                                                ),
                         ))->add('fotos', 'file', array(
-                    'label' => "Foto's",
-                    'required' => false,
-                    "attr" => array("accept" => "image/jpeg"),
-                    'constraints' => array(new Assert\File(array('maxSize' => '2M', 'uploadIniSizeErrorMessage'=> 'The file is too large. Allowed maximum size is 2MB')))
-                ))->add('delete_images', 'choice', array(
-                    'choices'   => $images,
-                    'multiple'  => true,
-                    'expanded' => true
-                ));
+                            'label' => "Foto's",
+                            'required' => false,
+                            "attr" => array("accept" => "image/jpeg"),
+                            'constraints' => array(new Assert\File(array('maxSize' => '2M', 'uploadIniSizeErrorMessage'=> 'The file is too large. Allowed maximum size is 2MB')))
+                        ))->add('delete_images', 'choice', array(
+                            'choices'   => $images,
+                            'multiple'  => true,
+                            'expanded' => true
+                        ));
                     if ('POST' == $app['request']->getMethod() && $vastgoed) {
                                 $editForm->bind($app['request']);
 
