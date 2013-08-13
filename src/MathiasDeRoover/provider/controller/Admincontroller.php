@@ -172,6 +172,7 @@ class AdminController implements ControllerProviderInterface {
             { 
             $pagenum = 1; 
             } 
+            
             //This sets the range to display in our query 
             return $max = 'limit ' .($pagenum - 1) * $page_rows .',' .$page_rows; 
         }
@@ -392,6 +393,12 @@ class AdminController implements ControllerProviderInterface {
                             'required' => false,
                             'empty_value' => false,
                             'constraints' => array(new Assert\NotBlank())
+                        ))->add('files', 'file', array(
+                                'label' => "Choose 1 - 5 pictures",
+                                "attr" => array(
+                                                "multiple" => "multiple",
+                                                "name" => "files[]",
+                                                ),
                         ))->add('fotos', 'file', array(
                     'label' => "Foto's",
                     'required' => false,
@@ -406,9 +413,7 @@ class AdminController implements ControllerProviderInterface {
                                 $editForm->bind($app['request']);
 
                                 if ($editForm->isValid()) {
-                                        $data = $editForm->getData();
-                                        
-                                
+                                        $data = $editForm->getData();                                
                                     
                                     $arrayMain = [
                                         "Prijs" => $data['prijs'],

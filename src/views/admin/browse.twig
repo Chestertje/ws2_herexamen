@@ -68,10 +68,10 @@
                                         {% endfor %}
                                 </ul>
                                 {% elseif app.session.get('filter') and not items %}
-                                <p>Er zijn geen resultaten gevonden</p>
+                                <p class="text-center">Er zijn geen resultaten gevonden</p>
                                 {% else %}
-                                    <p>Je hebt geen vastgoed!</p>
-                                    <p><a href="{{ app.url_generator.generate('adm.add') }}" class="btn btn-large btn-primary" >Maak vastgoed aan!</a></p>
+                                    <p class="text-center">Je hebt geen vastgoed!</p>
+                                    <p class="text-center"><a href="{{ app.url_generator.generate('adm.add') }}" class="btn btn-large btn-primary" >Maak vastgoed aan!</a></p>
                                 {% endif %}
                                     
                                 {% if pages > 1 %}
