@@ -11,7 +11,7 @@
         {% form_theme settingsForm with 'form_errors.twig' %}
         <form action="#" method="post" {{ form_enctype(settingsForm) }}>
             <div class="tabs">
-            <div id="saveButtons">
+            <div class="saveButtons">
                 <button type="submit" name="Save" class="btn btn-large btn-success">
                     <i class="icon-white icon-ok"></i> Aanpassingen opslaan
                 </button>
@@ -84,7 +84,7 @@
                     {{ form_errors(settingsForm.logo) }}
                 </dd>
                 <dd class="clearfix">
-                    <img class="profilePic" src="{{ app.request.baseUrl }}/files/images/{{ url }}" class="img-polaroid" />
+                    <img class="profilePic img-polaroid" alt="Logo" src="{{ app.request.baseUrl }}/files/images/{{ url }}" />
                 </dd>
                 <dt>
                     {{ form_label(settingsForm.beschrijving) }}
@@ -95,7 +95,7 @@
                 </dd>
             </dl>
             {{ form_widget(settingsForm._token) }}
-            <div id="saveButtons">
+            <div class="saveButtons">
                 <button type="submit" name="Save" class="btn btn-large btn-success">
                     <i class="icon-white icon-ok"></i> Aanpassingen opslaan
                 </button>
