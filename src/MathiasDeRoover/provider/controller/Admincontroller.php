@@ -17,8 +17,7 @@ class AdminController implements ControllerProviderInterface {
 		$controllers = $app['controllers_factory'];
 
 		// Bind sub-routes
-		$controllers->get('/', array($this, 'admin'));
-                
+		$controllers->get('/', array($this, 'admin'));                
                 $controllers->get('/browse', array($this, 'browse'))->method('GET|POST')->bind('adm.browse')->before(array($this, 'checkLogin'));
 		$controllers->match('/add', array($this, 'add'))->method('GET|POST')->bind('adm.add')->before(array($this, 'checkLogin'));
                 $controllers->match('/delete', array($this, 'delete'))->method('GET|POST')->bind('adm.delete')->before(array($this, 'checkLogin'));
@@ -97,7 +96,7 @@ class AdminController implements ControllerProviderInterface {
             ))->add('straat', 'text', array(
                 'data' => $filter['vastgoed.Straat'],
                 'required' => false,
-                'constraints' => array(new Assert\Regex(array('pattern' => "/^[a-z\d\-_\s]+$/i",'match' => true,'message' => 'Enkel letters en cijfers')))
+                //'constraints' => array(new Assert\Regex(array('pattern' => "/^[a-z\d\-_\s]+$/i",'match' => true,'message' => 'Enkel letters en cijfers')))
             ));
             if ('POST' == $app['request']->getMethod()) {
             $filterForm->bind($app['request']);
@@ -111,17 +110,18 @@ class AdminController implements ControllerProviderInterface {
                         "vastgoed.Status_id" => $data["status"]
                     ];
                     $like = [
-                        "vastgoed.Straat" => $app->escape($data['straat'])
+                        "vastgoed.Straat" => $data['straat']
                     ];
                     $session = [
                         "vastgoed.Provincie_id" => $data['provincie'],
                         "vastgoed.Vastgoedtype_id" => $data['vastgoed_type'],
                         "vastgoed.Status_id" => $data["status"],
                         "offset" => $data['offset'],
-                        "vastgoed.Straat" => $app->escape($data['straat'])
+                        "vastgoed.Straat" => $data['straat']
                     ];
                     $app['session']->set('filter', $session);
                     
+                   
                     return $app->redirect($app['url_generator']->generate('adm.browse'));
                 }
             }
@@ -131,11 +131,11 @@ class AdminController implements ControllerProviderInterface {
                         "vastgoed.Provincie_id" => $app['session']->get('filter')['vastgoed.Provincie_id'],
                         "vastgoed.Vastgoedtype_id" => $app['session']->get('filter')['vastgoed.Vastgoedtype_id'],
                         "vastgoed.Status_id" => $app['session']->get('filter')["vastgoed.Status_id"],
-                        
-                    ];
+                ];
                 $like = [
                     "vastgoed.Straat" => $app['session']->get('filter')["vastgoed.Straat"]
                 ];
+                
                 $limit = $this->paging($app, $filter, $like, $app['request']->get('page'), $offsetOptions[$offset], $id );
                 $items = $app['admin']->filter($id, $filter,$like, $limit);
                 return $app['twig']->render('admin/browse.twig', array('username' => $username,'items' => $items,'pages' => $this->last, 'page' => $pagenum , 'filterForm' => $filterForm->createView()));
