@@ -25,6 +25,7 @@
                     {{ form_errors(registerForm.password.Password) }}
                 
             </dl>
+            <p class="muted">* Alle velden zijn verplicht</p>
             {{ form_widget(registerForm._token) }}
             <button class="btn btn-large btn-primary" type="submit" name="submit">Registreer</button>
             <a href="{{ app.url_generator.generate('auth.login') }}">Annuleren</a>

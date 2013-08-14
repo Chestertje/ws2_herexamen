@@ -12,6 +12,7 @@
         {% form_theme addForm with 'form_errors.twig' %}
         <form id="addForm" class="form-horizontal" action="#" method="post" {{ form_enctype(addForm) }}>
             <div class="tabs">
+                <p class="muted text-center">*Velden in het rood zijn verplicht</p>
             <ul id="myTab" class="nav nav-tabs">
               <li class="active"><a href="#1" data-toggle="tab">Locatie</a></li>
               <li class=""><a href="#2" data-toggle="tab">Informatie</a></li>
@@ -182,6 +183,7 @@
                         <a href="{{ app.url_generator.generate('adm.browse') }}" class="btn btn-danger">
                             <i class="icon-white icon-remove"></i> Annuleren
                         </a>
+                        <p class="muted text-center">*Velden in het rood zijn verplicht</p>
                     </div>
                     <ul class="pager">
                         <li><a class="prev" href="#">Previous</a></li>

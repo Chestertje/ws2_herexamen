@@ -31,6 +31,9 @@
           text-align: right;
           margin: 0 auto;
       }
+      .required {
+          color: red;
+      }
       #filter {
           width: 200px;
       }
